@@ -11,7 +11,6 @@ class ProtectedDictIntError(KeyError):
     UNDEFINED_OPERATION_ADD_FOR_TUPLE = 3
     UNDEFINED_OPERATION_ADD_FOR_TYPE = 4
     UNDEFINED_OPERATION_SUB_FOR_TYPE = 5
-    KEY_IS_NOT_MISSING_IN_DICT = 6
 
     def __init__(self, err_code, *args):
         super().__init__()
@@ -32,8 +31,6 @@ class ProtectedDictIntError(KeyError):
             message += "Операція + не визначена для даного типу: "
         elif self.err_code == ProtectedDictIntError.UNDEFINED_OPERATION_SUB_FOR_TYPE:
             message += "Операція - не визначена для даного типу: "
-        elif self.err_code == ProtectedDictIntError.KEY_IS_NOT_MISSING_IN_DICT:
-            message += "Ключ не міститься в словнику: "
         return message + str(self.args)
 
 
@@ -114,7 +111,7 @@ class ProtectedDictInt:
         if isinstance(other, int):
             if other not in self:
                 raise ProtectedDictIntError(
-                    ProtectedDictIntError.KEY_IS_NOT_MISSING_IN_DICT,
+                    ProtectedDictIntError.KEY_IS_MISSING_IN_DICT,
                     other
                 )
             for key, value in self.dict.items():
