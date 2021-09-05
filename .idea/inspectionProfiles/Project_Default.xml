@@ -1,0 +1,15 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="t1_1_quadratic_equation" />
+          <option value="t2_turtle.t01_02.main.triangle" />
+          <option value="t2_turtle.t01_02.main.*" />
+          <option value="t3_inheritance.t03_01_equation.QuadraticEquation.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
