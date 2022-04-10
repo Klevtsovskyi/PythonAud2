@@ -81,37 +81,6 @@ class Circle(Figure):
         up()
 
 
-#################### клас Quadrate  ############################
-################################################################
-
-class Quadrate(Figure):
-    """ Клас Квадрат """
-
-    def __init__(self, x, y, a, color):
-        """ Конструктор
-        Ініціалізує положення лівого нижнього кута квадрата,
-        довжину його сторони і колір.
-        :param x: координата x лівого нижнього кута квадрата
-        :param y: координата y лівого нижнього кута квадрата
-        :param a: довжина сторони квадрата
-        :param color: колір квадрата
-        """
-        super().__init__(x, y, color)  # виклик конструктора базового класу
-        self._a = a
-
-    def _draw(self, color):
-        """ Допоміжний метод, що зображує квадрат заданим кольором
-        :param color: колір
-        """
-        pencolor(color)
-        up()
-        setpos(self._x, self._y)
-        down()
-        for i in range(4):
-            forward(self._a)
-            left(90)
-        up()
-
 #################### клас Triangle  ############################
 ################################################################
 
@@ -130,7 +99,6 @@ class Triangle(Figure):
         :param a: довжина сторони трикутника
         :param color: колір трикутника
         """
-
         super().__init__(x, y, color)  # виклик конструктора базового класу
         self._a = a
 
@@ -140,12 +108,15 @@ class Triangle(Figure):
         """
         pencolor(color)
         up()
+
         setpos(self._x, self._y)
+        setheading(0)
         down()
-        for i in range(3):
+        for _ in range(3):
             forward(self._a)
             left(120)
         up()
+
 
 #################### клас Trapezoid  ###########################
 ################################################################
@@ -177,7 +148,9 @@ class Trapezoid(Figure):
         """
         pencolor(color)
         up()
+
         setpos(self._x, self._y)
+        setheading(0)
         down()
         forward(self._a)
         left(120)
@@ -192,7 +165,7 @@ class Trapezoid(Figure):
 #################### клас Rectangle  ###########################
 ################################################################
 
-class Rectangle(Trapezoid):
+class Rectangle(Figure):
     """ Клас Прямокутник
 
     Використовується для зображення прямокутника на екрані
@@ -208,7 +181,9 @@ class Rectangle(Trapezoid):
         :param b: друга сторона прямокутника
         :param color: колір прямокутника
         """
-        super().__init__(x, y, a, b, color)  # виклик конструктора базового класу
+        super().__init__(x, y, color)  # виклик конструктора базового класу
+        self._a = a
+        self._b = b
 
     def _draw(self, color):
         """ Віртуальний метод, що зображує прямокутник на екрані заданим кольором
@@ -216,9 +191,11 @@ class Rectangle(Trapezoid):
         """
         pencolor(color)
         up()
+
         setpos(self._x, self._y)
+        setheading(0)
         down()
-        for i in range(2):
+        for _ in range(2):
             forward(self._a)
             left(90)
             forward(self._b)
@@ -226,29 +203,22 @@ class Rectangle(Trapezoid):
         up()
 
 
-class Cross(Figure):
+#################### клас Quadrate  ############################
+################################################################
+
+class Quadrate(Rectangle):
+    """ Клас Квадрат """
 
     def __init__(self, x, y, a, color):
-        super().__init__(x, y, color)
-        self._a = a
-
-    def _draw(self, color):
-        pencolor(color)
-        up()
-        setpos(self._x, self._y)
-        d = (2 * self._a**2)**0.5
-        setheading(45)
-        forward(d / 2)
-        down()
-        backward(d)
-        up()
-        left(45)
-        forward(self._a)
-        left(45)
-        down()
-        backward(d)
-        up()
-        setheading(0)
+        """ Конструктор
+        Ініціалізує положення лівого нижнього кута квадрата,
+        довжину його сторони і колір.
+        :param x: координата x лівого нижнього кута квадрата
+        :param y: координата y лівого нижнього кута квадрата
+        :param a: довжина сторони квадрата
+        :param color: колір квадрата
+        """
+        super().__init__(x, y, a, a, color)  # виклик конструктора базового класу
 
 
 ################################################################
@@ -257,8 +227,9 @@ class Cross(Figure):
 if __name__ == '__main__':
     # Ініціалізація turtle
     home()
-    delay(30)
+    delay(3)
     speed(10)
+    width(3)
 
     ###### Перевірка кола ############
     c = Circle(120, 120, 50, "blue")
@@ -289,10 +260,5 @@ if __name__ == '__main__':
     t.show()
     t.move(-30, -140)
     t.hide()
-
-    c = Cross(100, 100, 50, "red")
-    c.show()
-    c.move(-30, -140)
-    c.hide()
 
     mainloop()
